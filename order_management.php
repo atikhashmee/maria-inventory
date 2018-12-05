@@ -362,11 +362,13 @@
 
         var rows=[];
         var sum = 0;
+         var totaprice = 0;
         for (var i = 0,j=1; i < elements.length; i++,j++) {
          rows.push({"sl":j,"pro":prod[elements[i].productid],"price":elements[i].price,"quantity":elements[i].quantity});
           sum += parseInt(elements[i].quantity);
+          totaprice += parseInt(elements[i].price);
         }
-        rows.push({"sl":" ","desc":" ","category":"Total amount = ","amount":sum});
+        rows.push({"sl":" ","pro":" ","price":totaprice,"quantity":sum});
         
         // Only pt supported (not mm or in)
         var doc = new jsPDF('p', 'pt');

@@ -226,6 +226,9 @@
 
 <?php include 'files/footer.php'; ?>
 <script src="assets/js/jquery.js"></script>
+<!-- making pdf using jspdf -->
+<script src="pdf/pdffile1.js"></script>
+<script src="pdf/pdffile2.js"></script>
 <script type="text/javascript">
    <?php 
       $pro = $db->selectAll("product_info");
@@ -353,6 +356,7 @@
             console.log(res);
           //  alert('res');
             alert("Product has been sold out ");
+            printPdf(purchaseitem,$("#billchallan").val(),$("#datesell").val());
             window.location.href="sellproduct.php";
           })
           .fail(function() {
@@ -423,6 +427,81 @@
    
    
    
+   //pdf genereator
+        function printPdf(elements,invoice,selldate) {
+          
+                  var columns = [
+            {title: "SL", dataKey: "sl"},
+            {title: "Product", dataKey:"pro"},
+            {title: "Price", dataKey:"price"}, 
+            {title: "Quantity", dataKey: "quantity"},
+        ];
+
+        var rows=[];
+        var sum = 0;
+        var totaprice = 0;
+        for (var i = 0,j=1; i < elements.length; i++,j++) {
+         rows.push({"sl":j,"pro":prod[elements[i].pname],"price":elements[i].price,"quantity":elements[i].quntity});
+          sum += parseInt(elements[i].quntity);
+          totaprice += parseInt(elements[i].price);
+        }
+        rows.push({"sl":" ","pro":" ","price":totaprice,"quantity":sum});
+        
+        // Only pt supported (not mm or in)
+        var doc = new jsPDF('p', 'pt');
+        
+        doc.autoTable(columns, rows, {
+            theme: 'grid',
+            styles: {
+            
+              columnWidth: 'auto'
+            },
+            columnStyles: {
+              id: {fillColor: 0}
+            },
+            alternateRowStyles: {
+              fillColor: 255
+            },
+            margin: {top: 150},
+            addPageContent: function(data) {
+             
+
+            }
+        });
+       // doc.setDrawColor(100);
+        //doc.setFillColor(false);
+        doc.rect(350, 30, 200, 20, 'S'); //Fill and Border
+        doc.rect(350, 50, 200, 20, 'S'); //Fill and Border
+        doc.setFontSize(16);
+        doc.setFontType('Times');
+        doc.text("Invoice : "+invoice,350, 45);
+        doc.text("Date : "+selldate, 350, 65);
+
+        doc.setFontSize(26);
+        doc.text("Apsara Apparels design", 40, 30);
+        doc.setFontSize(12);
+        doc.text("House # 04, Road # 05, Sector # 06, Uttara, Dhaka", 40, 50);
+        doc.text("Tel: 0088-02-7912748", 40, 70);
+        
+
+
+
+
+        //---------downbelow
+        doc.setFontSize(16);
+        doc.setTextColor(0,0,0);
+        doc.rect(50, 750, 100, 45, 'S');
+        doc.text("Prepared By",55,790);
+        doc.rect(150, 750, 100, 45, 'S');
+         doc.text("Paid By",155,790);
+        doc.rect(250, 750, 100, 45, 'S');
+        doc.text("Recipent",255,790);
+        doc.rect(350, 750, 100, 45, 'S');
+        doc.text("Checked By",355,790);
+        doc.rect(450, 750, 100, 45, 'S');
+         doc.text("Approved By",455,790);
+          doc.save("Invoice.pdf");
+        }
    
    
 </script>
