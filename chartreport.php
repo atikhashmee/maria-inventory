@@ -48,10 +48,8 @@ h4{
   font-size:0.90em;
 }
    </style>
-  <div class="container-fluid">
-  	<div class="row">
-  		<div class="col">
-        <?php
+
+   <?php
           function getQuantityTotal($pid)
           {
              $pq = $GLOBALS['db']->joinQuery('SELECT SUM(`quantity`) as total FROM `sell` WHERE `productid`="'.$pid.'"')->fetch(PDO::FETCH_ASSOC);
@@ -66,17 +64,26 @@ h4{
          }
           
   ?>
+  <div class="container-fluid">
+  	<div class="row">
+      <div class="col"></div>
+
+  		<div class="col">
+        
   		<div id="piechart"></div>
       </div>
+       <div class="col"></div>
 
   		
   		
   	</div>
 
     <div class="row" style="margin-top: 45px">
+       <div class="col"></div>
       <div class="col">
         <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
       </div>
+       <div class="col"></div>
       
     </div>
   </div>
@@ -86,6 +93,7 @@ h4{
 
 <?php include 'files/footer.php'; ?>
 <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+<script type="text/javascript" src="assets/js/jquery.js"></script>
 <script type="text/javascript" src="assets/js/chartloader.js"></script>
 <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 <script type="text/javascript">

@@ -1,9 +1,5 @@
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +11,7 @@
 
     <!-- Site Properties -->
     <title>Login :: Panel</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -66,5 +63,7 @@
 
 	</aside> <!-- col.// -->
     </div>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"  crossorigin="anonymous"></script>
 </body>
 </html>

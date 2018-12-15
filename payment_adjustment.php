@@ -2,7 +2,22 @@
 <?php include 'files/menu.php'; ?>
 
 
-
+<style type="text/css">
+  .green-sign{
+    height: 20px;
+    width: auto;
+    padding: 5px;
+    background-color: green;
+    color: white;
+  }
+  .red-sign{
+    height: 20px;
+    width:auto;
+    padding: 5px;
+    background-color: red;
+    color: white;
+  }
+</style>
 
 <div class="container-fluid">
    <div class="row">
@@ -98,7 +113,13 @@
                  <td></td>
                  <td></td>
                  <td>Due</td>
-                 <td><?=$sum-$paidamount?></td>
+                 <td>
+                  <?php 
+                    $due = $sum-$paidamount;
+                  $clsname = ($due>0)?"red-sign":"green-sign";
+                  ?>
+                    <span class="<?=$clsname?>"><?=$due?></span>
+                  </td>
                </tr>
                
            </table>
@@ -196,7 +217,7 @@ window.location.href='payment_adjustment.php?invoiceid='+<?=$_GET['invoiceid']?>
         <tr>
           <td><?=$i?></td>
           <td><?=$pi['invoiceno']?></td>
-          <td><?=$pi['customerid']?></td>
+          <td><?=$fn->getUserName($pi['customerid'])?></td>
           <td><?=$pi['payamount']?></td>
           <td><?=$pi['paymentdate']?></td>
           <td><a href="" class="btn btn-danger">Delete</a></td>
